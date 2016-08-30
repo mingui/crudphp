@@ -96,11 +96,6 @@ include 'includes/conexion.php';
     <?php } ?>
 
 
-
-
-
-
-
   </div>
 <table class="table table-striped">
   <tr>
