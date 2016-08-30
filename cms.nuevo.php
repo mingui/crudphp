@@ -32,9 +32,7 @@ include 'includes/conexion.php';
 
     </aside>
 <section class="col-md-10">
-  <h2>CMS<a href="cms.nuevo.php" class="btn btn-xl btn-info">NUEVO CMS</a></h2>
-
-  <?php $stmt = $con->query("SELECT * FROM cms"); ?>
+  <h2>TEMPLATE<a href="#" id="nuevo-usuario" class="btn btn-xl btn-info">NUEVO CMS</a></h2>
 
 <table class="table table-striped">
 <thead>
@@ -42,15 +40,17 @@ include 'includes/conexion.php';
     <td>ID</td>
     <td>TITULO</td>
     <td>FECHA</td>
+
     <td>ACCIONES</td>
   </tr>
 </thead>
 
-  <?php while($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+  <?php for ($i=0; $i < 10; $i++) {
+?>
     <tr>
-      <td><?php echo $fila['id']; ?></td>
-      <td><?php echo $fila['nombre']; ?></td>
-      <td> <?php echo $fila['fecha']; ?></td>
+      <td>text</td>
+      <td>text</td>
+      <td>text</td>
 
       <td>
         <div class="btn-group">
@@ -67,26 +67,6 @@ include 'includes/conexion.php';
 <footer class="col-md-12">
 <?php include 'includes/footer.php'; ?>
 </footer>
-
-<script type="text/javascript">
-      $('#nuevo-usuario').click(function(){
-        $('#reg-usuario').removeClass('hidden');
-      });
-
-      $('#cancelar-registro').click(function(){
-        $('#reg-usuario').addClass('hidden');
-      });
-
-      //Function para eliminar usuario
-      function eliminarUsuario(id){
-          if(confirm('Desea borrar este usuario?'))
-            {
-              window.location="usuario.eliminar.php?accion=eliminar&id="+id;
-            } else {
-              //no
-            }
-      }
-</script>
 
   </body>
 </html>
