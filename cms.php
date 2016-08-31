@@ -54,8 +54,8 @@ include 'includes/conexion.php';
 
       <td>
         <div class="btn-group">
-        <a href="?editar&id=1" class="btn btn-sm btn-info">Editar</a>
-        <a onclick="eliminarUsuario(1)" class="btn btn-sm btn-danger">Eliminar</a>
+        <a href="cms.editar.php?id=<?php echo $fila['id']; ?>" class="btn btn-sm btn-info">Editar</a>
+        <a onclick="eliminarCms(<?php echo $fila['id']; ?>)" class="btn btn-sm btn-danger">Eliminar</a>
         </div>
       </td>
     </tr>
@@ -69,19 +69,13 @@ include 'includes/conexion.php';
 </footer>
 
 <script type="text/javascript">
-      $('#nuevo-usuario').click(function(){
-        $('#reg-usuario').removeClass('hidden');
-      });
 
-      $('#cancelar-registro').click(function(){
-        $('#reg-usuario').addClass('hidden');
-      });
 
-      //Function para eliminar usuario
-      function eliminarUsuario(id){
-          if(confirm('Desea borrar este usuario?'))
+      //Function para eliminar cms
+      function eliminarCms(id){
+          if(confirm('Desea borrar este cms?'))
             {
-              window.location="usuario.eliminar.php?accion=eliminar&id="+id;
+              window.location="cms.elimnar.php?accion=eliminar&id="+id;
             } else {
               //no
             }

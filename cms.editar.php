@@ -32,24 +32,27 @@ include 'includes/conexion.php';
 
     </aside>
 <section class="col-md-10">
-  <h2>REGISTRAR NUEVO CMS</h2>
-
+  <h2>EDITAR CMS</h2>
+<?php $id = $_GET['id']; ?>
+<?php $stmt = $con->query('SELECT * FROM cms WHERE id = ' . $id); ?>
+<?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
   <form class="" action="cms.guardar.php" method="post">
     <div class="form-group col-md-7">
       <label>Titulo</label>
-      <input type="text" name="nombre" class="form-control" placeholder="Ingrese el tiutlo del CMS">
+      <input type="text" name="nombre" class="form-control" value="<?php echo $fila['nombre']; ?>">
     </div>
 
     <div class="form-group col-md-7">
       <label>Imagen</label>
-      <input type="text" name="imagen" class="form-control" placeholder="Haga Click para subir una imagen">
+      <input type="text" name="imagen" class="form-control" value="<?php echo $fila['imagen']; ?>">
     </div>
 
 
     <div class="form-group col-md-7">
       <label>Contenido</label>
-      <textarea name="contenido" class="form-control"></textarea>
-      <input type="hidden" name="accion" value="guardar">
+      <textarea name="contenido" class="form-control"><?php echo $fila['contenido'] ?></textarea>
+      <input type="hidden" name="accion" value="editar">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
     </div>
 
     <div class="form-group col-md-7">
@@ -61,6 +64,7 @@ include 'includes/conexion.php';
 
 
   </form>
+<?php } ?>
 
 
 
