@@ -5,11 +5,12 @@ include 'includes/conexion.php';
     if(isset($_GET['accion']) & $_GET['accion'] == 'eliminar' ) {
       //ELIMINAMOS EL REGISTRO
 
-      $id = $_GET['id'];
-      $stmt = $con->query('DELETE FROM cms WHERE id = ' . $id);
+      $codigo = $_GET['id'];
+      $stmt = $con->query('DELETE FROM cms WHERE id = ' . $codigo);
 
       if($stmt->rowCount()>0){
         header('Location:  cms.php');
+
       }
     }
 
