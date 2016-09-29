@@ -39,37 +39,51 @@ include 'includes/conexion.php';
 
     </aside>
 <section class="col-md-10">
-  <h2>REGISTRAR NUEVO CMS</h2>
+  <h2>Editar evento</h2>
 
-  <form class="" action="cms.guardar.php" method="post">
+<?php $id = $_GET['id']; ?>
+<?php $stmt = $con->query('SELECT * FROM eventos WHERE id = ' . $id); ?>
+<?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+
+
+  <form class="" action="evento.guardar.php" method="post">
     <div class="form-group col-md-7">
       <label>Titulo</label>
-      <input type="text" name="nombre" class="form-control" placeholder="Ingrese el tiutlo del CMS">
+        <input type="text" name="nombre" class="form-control" value="<?php echo $fila['nombre']; ?>" placeholder="Ingrese el titulo del evento">
     </div>
-
     <div class="form-group col-md-7">
-      <label>Imagen</label>
-      <input type="text" name="imagen" class="form-control" placeholder="Haga Click para subir una imagen">
+      <label>Fecha evento</label>
+        <input type="date" name="fecha" class="form-control" value="<?php echo $fila['fecha']; ?>" required="required">
     </div>
-
-
     <div class="form-group col-md-7">
-      <label>Contenido</label>
-      <textarea name="contenido" class="form-control"></textarea>
-      <input type="hidden" name="accion" value="guardar">
-    </div>
+      <label>Descripcion</label>
+        <textarea name="descripcion" class="form-control"><?php echo $fila['description']; ?></textarea>
+        <input type="hidden" name="accion" value="editar">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
 
+    </div>
     <div class="form-group col-md-7">
-      <div class="btn-group">
-          <a href="cms.php" class="btn btn-danger">Cancelar</a>
-          <button type="submit" class="btn btn-success">Guardar</button>
-      </div>
+      <label>Detalle</label>
+        <input type="text" name="imagen" class="form-control" value="<?php echo $fila['detalle']; ?>" placeholder="Ingrese el detalle del evento">
+    </div>
+    <div class="form-group col-md-7">
+      <label>Imagen Portada</label>
+        <input type="text" name="imagen" class="form-control" value="<?php echo $fila['imagen_portada']; ?>" placeholder="Haga click para subir una imagen">
     </div>
 
+
+<div class="form-group col-md-7">
+  <div class="btn-group">
+    <a href="eventos.php" class="btn btn-danger">Cancelar</a>
+    <button type="submit" class="btn btn-success">Guardar</button>
+
+  </div>
+
+</div>
 
   </form>
 
-
+  <?php }  ?>
 
 
 </section>

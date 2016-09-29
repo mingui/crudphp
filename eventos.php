@@ -39,30 +39,37 @@ include 'includes/conexion.php';
 
     </aside>
 <section class="col-md-10">
-  <h2>TEMPLATE<a href="#" id="nuevo-usuario" class="btn btn-xl btn-info">NUEVO CMS</a></h2>
+  <h2>Eventos<a href="evento.registrar.php" class="btn btn-xl btn-info">NUEVO EVENTO</a></h2>
 
 <table class="table table-striped">
-<thead>
+
   <tr>
     <td>ID</td>
     <td>TITULO</td>
-    <td>FECHA</td>
+    <td>Descripcion</td>
+    <td>Detalle</td>
+    <td>Imagen Portada</td>
+    <td>Fecha</td>
 
     <td>ACCIONES</td>
   </tr>
-</thead>
+  <?php
+$stmt = $con->query("SELECT * FROM eventos"); ?>
 
-  <?php for ($i=0; $i < 10; $i++) {
-?>
+<?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {?>
+
     <tr>
-      <td>text</td>
-      <td>text</td>
-      <td>text</td>
+      <td><?php echo $fila['id']; ?></td>
+      <td><?php echo $fila['nombre']; ?></td>
+      <td><?php echo $fila['description']; ?></td>
+      <td><?php echo $fila['detalle']; ?></td>
+      <td><img src="../imagenes/eventos/<?php echo $fila['imagen_portada']; ?>" width="60" class="img img-thumbnail" /></td>
+      <td><?php echo $fila['fecha']; ?></td>
 
       <td>
         <div class="btn-group">
-        <a href="?editar&id=1" class="btn btn-sm btn-info">Editar</a>
-        <a onclick="eliminarUsuario(1)" class="btn btn-sm btn-danger">Eliminar</a>
+        <a href="evento.editar.php?editar&id=<?php echo $fila['id']; ?>" class="btn btn-sm btn-info">Editar</a>
+        <a onclick="eliminar(<?php echo $fila['id']; ?>)" class="btn btn-sm btn-danger">Eliminar</a>
         </div>
       </td>
     </tr>
@@ -79,16 +86,14 @@ include 'includes/conexion.php';
       $('#nuevo-usuario').click(function(){
         $('#reg-usuario').removeClass('hidden');
       });
-
       $('#cancelar-registro').click(function(){
         $('#reg-usuario').addClass('hidden');
       });
-
       //Function para eliminar usuario
-      function eliminarUsuario(id){
-          if(confirm('Desea borrar este usuario?'))
+      function eliminar(id){
+          if(confirm('Desea borrar este evento?'))
             {
-              window.location="usuario.eliminar.php?accion=eliminar&id="+id;
+              window.location="evento.eliminar.php?accion=eliminar&id="+id;
             } else {
               //no
             }

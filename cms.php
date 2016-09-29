@@ -1,4 +1,11 @@
 <?php
+   @session_start();
+   if (!isset($_SESSION['logeado'])) {
+      header('Location: login.php');
+      exit;
+  }
+?>
+<?php
 include 'includes/conexion.php';
  ?>
 <!DOCTYPE html>
