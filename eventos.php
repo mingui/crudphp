@@ -60,7 +60,7 @@ $stmt = $con->query("SELECT * FROM eventos"); ?>
 
     <tr>
       <td><?php echo $fila['id']; ?></td>
-      <td><?php echo $fila['nombre']; ?></td>
+      <td><a href="evento.detalle.php?id=<?php echo $fila['id']; ?>"><?php echo $fila['nombre']; ?></a></td>
       <td><?php echo $fila['description']; ?></td>
       <td><?php echo $fila['detalle']; ?></td>
       <td><img src="../imagenes/eventos/<?php echo $fila['imagen_portada']; ?>" width="60" class="img img-thumbnail" /></td>

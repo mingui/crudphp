@@ -38,39 +38,51 @@ include 'includes/conexion.php';
 
 
     </aside>
-<section class="col-md-10">
-  <h2>TEMPLATE<a href="#" id="nuevo-usuario" class="btn btn-xl btn-info">NUEVO CMS</a></h2>
+    <section class="col-md-10">
+      <h2>GALERIA CREAR</h2>
+      <?php $id = $_GET['id']; ?>
+      <?php  $stmt = $con->query("SELECT * FROM eventos WHERE id = $id"); ?>
 
-<table class="table table-striped">
-<thead>
-  <tr>
-    <td>ID</td>
-    <td>TITULO</td>
-    <td>FECHA</td>
-
-    <td>ACCIONES</td>
-  </tr>
-</thead>
-
-  <?php for ($i=0; $i < 10; $i++) {
-?>
-    <tr>
-      <td>text</td>
-      <td>text</td>
-      <td>text</td>
-
-      <td>
-        <div class="btn-group">
-        <a href="?editar&id=1" class="btn btn-sm btn-info">Editar</a>
-        <a onclick="eliminarUsuario(1)" class="btn btn-sm btn-danger">Eliminar</a>
+      <form class="" action="galeria.guardar.php" method="post" enctype="multipart/form-data">
+        <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+          <h1><?php echo $fila['nombre']; ?></h1>
+        <div class="form-group">
+                  <input type="hidden" name="nombre" value="<?php echo $fila['nombre']; ?>" class="form-control" >
         </div>
-      </td>
-    </tr>
-  <?php } ?>
 
-</table>
+        <div class="form-group">
 
-</section>
+            <input type="hidden" name="evento_id" value="<?php echo $fila['id']; ?>" class="form-control" >
+        </div>
+
+        <div class="form-group">
+            <label for="">Imagen</label>
+            <input type="file" name="imagen" class="form-control" value="" required="required" placeholder="Haga click para subir una imagen">
+
+        </div>
+        <input type="hidden" name="accion" value="guardar">
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+      <?php } ?>
+      </form>
+
+      <hr>
+
+      <div class="row">
+          <?php  $stmt = $con->query("SELECT * FROM fotos WHERE evento_id = $id"); ?>
+          <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+              <div class="col-md-2 text-center">
+                  <img src="../imagenes/fotos/<?php echo $fila['imagen'] ?>" class="img img-responsive img-thumbnail" />
+                  <br>
+                  <span class="badge">Vistas: <?php echo $fila['vistas'] ?> / <a href="#">Eliminar</a></span>
+              </div>
+          <?php } ?>
+      </div>
+
+
+
+
+    </section>
 <footer class="col-md-12">
 <?php include 'includes/footer.php'; ?>
 </footer>
