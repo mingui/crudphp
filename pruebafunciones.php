@@ -83,6 +83,14 @@ Se destaco tambien en sonido para grandes eventos que requiere cubrir una gran a
   <?php recorrer_array(500); ?>
 
 
+
+  <?php get_detalle_cms(3); ?>
+
+
+    <?php get_detalle_cms(4); ?>
+
+    <?php get_detalle_cms(3); ?>
+
 </section>
 <footer class="col-md-12">
 <?php include 'includes/footer.php'; ?>
